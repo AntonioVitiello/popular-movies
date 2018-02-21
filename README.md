@@ -22,3 +22,6 @@ I affirm this submission is of my own work and have not used code from any other
 I have correctly attributed all code obtained from other sources, such as websites, books, forums, blogs, GitHub repos, etc.
 
 I understand that Udacity will check my submission for plagiarism and that failure to adhere to the [Udacity Honor Code](https://udacity.zendesk.com/hc/en-us/articles/210667103-What-is-the-Udacity-Honor-Code) may result in the cancellation of my enrollment.
+
+![Home section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Home.png)
+![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Detail.png)
