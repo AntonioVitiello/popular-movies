@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/poster_elevation"
+    app:cardBackgroundColor="#000000"
+    app:cardCornerRadius="@dimen/poster_card_corner_radius"
+    app:contentPaddingTop="@dimen/poster_content_padding"
+    app:contentPaddingBottom="@dimen/poster_content_padding">
+
+    <ImageView
+        android:id="@+id/poster_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:maxHeight="240dp"
+        tools:src="@drawable/sample" />
+
+</android.support.v7.widget.CardView>

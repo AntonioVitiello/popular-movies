@@ -1,0 +1,35 @@
+<resources>
+    <!--app name-->
+    <string name="app_name">Popular Movie</string>
+
+    <!-- Menu items-->
+    <string name="most_popular">Most Popular</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="favorite">Favorites</string>
+
+
+    <!-- Detail Activity-->
+    <string name="detail_also_known_as_label">Also known as:</string>
+    <string name="detail_place_of_origin_label">Place of origin:</string>
+    <string name="detail_description_label">Description:</string>
+    <string name="detail_ingredients_label">Ingredients:</string>
+
+    <!-- Content descriptions-->
+    <string name="sandwich_picture_content_description">Sandwich picture</string>
+
+    <!-- Common LOG_TAG for debugging-->
+    <string name="log_tag">Antonio</string>
+
+    <string name="detail_rating">Rating</string>
+    <string name="detail_release_date">Release date</string>
+    <string name="detail_synopsis">Synopsis</string>
+
+    <!--Device offline message-->
+    <string name="no_connection_msg">No network detected.</string>
+
+    <!--Field undefined in Detail Activity messages-->
+    <string name="no_rating_movie">0.0</string>
+    <string name="no_release_date">n.d.</string>
+    <string name="no_synopsis">Sorry this field is not defined for now.</string>
+
+</resources>
