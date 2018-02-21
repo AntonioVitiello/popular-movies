@@ -1,26 +1,15 @@
-# Sandwich Club Project, a project for Udacity Android Developer NanoDegree course
+# Popular Movies Project, a project for my Udacity Android Developer NanoDegree course
 
 ## Project Overview
-In this project, you will complete the **Sandwich Club** app to
-show the details of each sandwich once it is selected.
+The app retrieve and present in consistent way data using [The Movie DB](https://www.themoviedb.org) API
 
-## Why this Project
+Please **note** that the project do not contain any private API-Key, so first it is necessary to store your API-Key.
+API-Key can be added in gradle.properties file or could be a new OS environment variable.
 
-Building a layout and populating its fields from data received as JSON
-is a common task for Android Developers. Although JSON parsing is usually
-done using libraries, writing the JSON parsing for  this project will
-help you to better understand how it is processed.
+In gradle.properties file you can add the property:
+TMDB_API_KEY="your-pi-key-value-abcd1234567890"
 
-## What Will I Learn?
-Through this project, you will:
-- Learn how to submit projects for review
-- Practice JSON parsing to a model object
-- Design an activity layout
-- Populate all fields in the layout accordingly
+Environment variable is made up of a key and a value of this form:
+TMDB_API_KEY="your-pi-key-value-abcd1234567890"
 
-## How Do I Complete this Project?
-Download the [Sandwich Club app starter code.](https://github.com/udacity/sandwich-club-starter-code)
-
-Design the layout for the detail activity so the different elements
-display in a sensible way. Implement the JSON parsing in JsonUtils so it
-produces a Sandwich Object that can be used to populate the UI that you designed.
+I would also like to point out that in this project I have used an image from https://goo.gl/ccLeWY like placeholder and like launcher icon.
