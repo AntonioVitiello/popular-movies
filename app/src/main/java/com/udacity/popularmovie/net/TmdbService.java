@@ -12,12 +12,18 @@ import retrofit2.http.Query;
 
 public interface TmdbService {
 
-    // final URL will be eg: https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=1&api_key=<<API-KEY>>
-    @GET("discover/movie?sort_by=popularity.desc&page=1")
+    @GET("movie/popular")
     Call<TmdbResponseData> getPopularMovies(@Query("api_key") String apiKey);
 
-    @GET("discover/movie?sort_by=toprated.desc&page=1")
+    @GET("movie/top_rated")
     Call<TmdbResponseData> getTopRatedMovies(@Query("api_key") String apiKey);
+
+    // final URL will be eg: https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=1&api_key=<<API-KEY>>
+    @GET("discover/movie?sort_by=popularity.desc&page=1")
+    Call<TmdbResponseData> getDiscoverPopularMovies(@Query("api_key") String apiKey);
+
+    @GET("discover/movie?sort_by=toprated.desc&page=1")
+    Call<TmdbResponseData> getDiscoverTopRatedMovies(@Query("api_key") String apiKey);
 
     @GET("discover/movie?sort_by=revenue.desc&page=1")
     Call<TmdbResponseData> getFavoriteMovies(@Query("api_key") String apiKey);
