@@ -3,7 +3,7 @@
 ## Project Overview
 The app retrieve and present in consistent way data using [The Movie DB](https://www.themoviedb.org) API
 
-Please **note** that the project do not contain any private API-Key, so first it is necessary to store your API-Key.
+Please **note** that the project does not contain any private API-Key, so first it is necessary to store your API-Key.
 API-Key can be added in gradle.properties file or could be a new OS environment variable.
 
 In gradle.properties file you can add the property:
