@@ -1,4 +1,4 @@
-package com.udacity.popularmovie.model;
+package com.udacity.popularmovie.net.json.movies;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Antonio on 20/02/2018.
  */
 
-public class Result implements Parcelable {
+public class TmdbMovie implements Parcelable {
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
@@ -57,7 +57,10 @@ public class Result implements Parcelable {
     private String releaseDate;
 
 
-    protected Result(Parcel in) {
+    public TmdbMovie() {
+    }
+
+    protected TmdbMovie(Parcel in) {
         if (in.readByte() == 0) {
             voteCount = null;
         } else {
@@ -91,15 +94,15 @@ public class Result implements Parcelable {
         releaseDate = in.readString();
     }
 
-    public static final Creator<Result> CREATOR = new Creator<Result>() {
+    public static final Creator<TmdbMovie> CREATOR = new Creator<TmdbMovie>() {
         @Override
-        public Result createFromParcel(Parcel in) {
-            return new Result(in);
+        public TmdbMovie createFromParcel(Parcel in) {
+            return new TmdbMovie(in);
         }
 
         @Override
-        public Result[] newArray(int size) {
-            return new Result[size];
+        public TmdbMovie[] newArray(int size) {
+            return new TmdbMovie[size];
         }
     };
 

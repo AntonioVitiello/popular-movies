@@ -1,4 +1,4 @@
-package com.udacity.popularmovie.model;
+package com.udacity.popularmovie.net.json.movies;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Antonio on 20/02/2018.
  */
 
-public class TmdbResponseData implements Parcelable {
+public class TmdbMoviesContainer implements Parcelable {
 
     @SerializedName("page")
     @Expose
@@ -25,9 +25,9 @@ public class TmdbResponseData implements Parcelable {
     private Integer totalPages;
     @SerializedName("results")
     @Expose
-    private List<Result> results = null;
+    private List<TmdbMovie> results = null;
 
-    protected TmdbResponseData(Parcel in) {
+    protected TmdbMoviesContainer(Parcel in) {
         if (in.readByte() == 0) {
             page = null;
         } else {
@@ -43,18 +43,18 @@ public class TmdbResponseData implements Parcelable {
         } else {
             totalPages = in.readInt();
         }
-        results = in.createTypedArrayList(Result.CREATOR);
+        results = in.createTypedArrayList(TmdbMovie.CREATOR);
     }
 
-    public static final Creator<TmdbResponseData> CREATOR = new Creator<TmdbResponseData>() {
+    public static final Creator<TmdbMoviesContainer> CREATOR = new Creator<TmdbMoviesContainer>() {
         @Override
-        public TmdbResponseData createFromParcel(Parcel in) {
-            return new TmdbResponseData(in);
+        public TmdbMoviesContainer createFromParcel(Parcel in) {
+            return new TmdbMoviesContainer(in);
         }
 
         @Override
-        public TmdbResponseData[] newArray(int size) {
-            return new TmdbResponseData[size];
+        public TmdbMoviesContainer[] newArray(int size) {
+            return new TmdbMoviesContainer[size];
         }
     };
 
@@ -82,11 +82,11 @@ public class TmdbResponseData implements Parcelable {
         this.totalPages = totalPages;
     }
 
-    public List<Result> getResults() {
+    public List<TmdbMovie> getResults() {
         return results;
     }
 
-    public void setResults(List<Result> results) {
+    public void setResults(List<TmdbMovie> results) {
         this.results = results;
     }
 

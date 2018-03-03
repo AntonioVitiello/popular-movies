@@ -3,19 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/bnv_popular"
-        android:icon="@drawable/ic_popular_movie"
+        android:id="@+id/mi_popular"
+        android:icon="@drawable/ic_popular"
         android:title="@string/most_popular"
+        android:orderInCategory="100"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/bnv_top_rated"
+        android:id="@+id/mi_top_rated"
         android:icon="@drawable/ic_top_rated"
         android:title="@string/top_rated"
+        android:orderInCategory="200"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/bnv_favorite"
+        android:id="@+id/mi_favorites"
         android:icon="@drawable/ic_favorite"
         android:title="@string/favorite"
+        android:orderInCategory="300"
         app:showAsAction="ifRoom"/>
 
 </menu>

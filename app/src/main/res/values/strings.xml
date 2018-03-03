@@ -7,7 +7,6 @@
     <string name="top_rated">Top Rated</string>
     <string name="favorite">Favorites</string>
 
-
     <!-- Detail Activity-->
     <string name="detail_also_known_as_label">Also known as:</string>
     <string name="detail_place_of_origin_label">Place of origin:</string>
@@ -20,16 +19,52 @@
     <!-- Common LOG_TAG for debugging-->
     <string name="log_tag">Antonio</string>
 
+    <!--Detail labels, ie: card titles-->
     <string name="detail_rating">Rating</string>
     <string name="detail_release_date">Release date</string>
     <string name="detail_synopsis">Synopsis</string>
+    <string name="detail_trailers">Trailers</string>
+    <string name="detail_reviews">Reviews</string>
 
     <!--Device offline message-->
     <string name="no_connection_msg">No network detected.</string>
 
     <!--Field undefined in Detail Activity messages-->
-    <string name="no_rating_movie">0.0</string>
-    <string name="no_release_date">n.d.</string>
-    <string name="no_synopsis">Sorry this field is not defined for now.</string>
+    <string name="no_movie_rating">0.0</string>
+    <string name="no_movie_release_date">n.d.</string>
+    <string name="no_movie_synopsis">Sorry no synopsis this movie.</string>
+    <string name="no_trailers">Sorry no trailers for this movie.</string>
+    <string name="no_reviews">Sorry no reviews for this movie.</string>
+
+    <!--FAB: add remove movie from preferred-->
+    <string name="movie_added">Added to preferred</string>
+    <string name="movie_removed">Removed from preferred</string>
+
+    <!--The trailer image preview URL-->
+    <!--To retrieve a thumbnail image (120 x 90 px) of the video use eg: https://img.youtube.com/vi/3b946aGm0zs/default.jpg-->
+    <!--To retrieve a thumbnail image (480 x 360 px) of the video use eg: https://img.youtube.com/vi/3b946aGm0zs/0.jpg-->
+    <string name="trailer_thumbnail_url">https://img.youtube.com/vi/%1$s/0.jpg</string>
+
+    <!--Deafult trailer 'name' if returned empty-->
+    <string name="trailer_default_name">Trailer</string>
+
+    <!--Trailers video URL via app and browser -->
+    <string name="trailer_video_url_app">vnd.youtube:%1$s</string>
+    <string name="trailer_video_url_browser">http://www.youtube.com/watch?v=%1$s</string>
+
+    <!--The Movie Database API base URL-->
+    <string name="tmdm_base_url">https://api.themoviedb.org/3/</string>
+
+    <!--Poster image base URL-->
+    <string name="tmdm_poster_base_url">http://image.tmdb.org/t/p/w185/</string>
+
+    <!--Deafult message for a review comment empty -->
+    <string name="review_no_comment">No comment</string>
+
+    <!--Progressive count label of review-->
+    <string name="review_progressive_label">%1$d of %2$d</string>
+
+    <!--Content Provider Authority-->
+    <string name="content_authority">com.udacity.popularmovie</string>
 
 </resources>

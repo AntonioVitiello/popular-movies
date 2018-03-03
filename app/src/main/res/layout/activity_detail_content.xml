@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="detailModel"
+            type="com.udacity.popularmovie.model.DetailModel" />
+
+        <variable
+            name="trailersModel"
+            type="com.udacity.popularmovie.model.TrailersModel" />
+
+        <variable
+            name="noReviews"
+            type="boolean" />
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".DetailActivity"
+        tools:showIn="@layout/activity_detail">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout style="@style/linear_layout_defaults">
+
+                <!--IMAGE - RATING - RELEASE DATE CARD-->
+                <android.support.v7.widget.CardView style="@style/cards_details">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/detail_poster_iv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="16dp"
+                            android:adjustViewBounds="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:posterUrl="@{detailModel.posterPath}"
+                            tools:src="@drawable/im_poster_sample" />
+
+                        <TextView
+                            android:id="@+id/rating_label_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="32dp"
+                            android:text="@string/detail_rating"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/detail_poster_iv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/detail_rating_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@{detailModel.rating}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/detail_poster_iv"
+                            app:layout_constraintTop_toBottomOf="@+id/rating_label_tv"
+                            tools:text="6.21" />
+
+                        <TextView
+                            android:id="@+id/release_date_label_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="32dp"
+                            android:text="@string/detail_release_date"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/detail_poster_iv"
+                            app:layout_constraintTop_toBottomOf="@+id/detail_rating_tv" />
+
+                        <TextView
+                            android:id="@+id/detail_release_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="32dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@{detailModel.releaseDate}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/detail_poster_iv"
+                            app:layout_constraintTop_toBottomOf="@+id/release_date_label_tv"
+                            app:layout_constraintVertical_bias="0.0"
+                            tools:text="2018-02-21" />
+
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.v7.widget.CardView>
+                <!--IMAGE - RATING - RELEASE DATE CARD-->
+
+                <!--SYNOPSIS CARD-->
+                <android.support.v7.widget.CardView style="@style/cards_details">
+
+                    <LinearLayout style="@style/linear_layout_defaults">
+
+                        <TextView
+                            android:id="@+id/synopsis_label_tv"
+                            style="@style/card_title"
+                            android:text="@string/detail_synopsis" />
+
+                        <TextView
+                            android:id="@+id/synopsis_tv"
+                            style="@style/card_text_content"
+                            android:text="@{detailModel.synopsis}"
+                            tools:text="Lorem ipsum sictum fatut est dolcet et vaquo. Parlami o diva dell'ira funesta del pelide Achille che fece una palla di pello pollo proprio..." />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <!--SYNOPSIS CARD-->
+
+                <!--TRAILERS CARD-->
+                <android.support.v7.widget.CardView style="@style/cards_details">
+
+                    <LinearLayout
+                        style="@style/linear_layout_defaults"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:id="@+id/trailer_title_tv"
+                            style="@style/card_title"
+                            android:text="@string/detail_trailers" />
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TableLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TableRow
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent">
+
+                                    <View
+                                        android:layout_width="16dp"
+                                        android:layout_height="match_parent" />
+
+                                    <TextView
+                                        style="@style/card_text_content"
+                                        android:text="@string/no_trailers"
+                                        android:visibility="@{trailersModel.trailerCount == 0 ? View.VISIBLE : View.GONE}" />
+
+                                    <ImageView
+                                        android:id="@+id/trailer0_iv"
+                                        style="@style/trailers_image"
+                                        android:onClick="onTrailerClick"
+                                        android:tag="@{trailersModel.videoId[0]}"
+                                        android:visibility="@{trailersModel.trailerCount > 0 ? View.VISIBLE : View.GONE}"
+                                        app:thumbUrl="@{trailersModel.trailerThumb[0]}" />
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic_play_circle"
+                                        android:visibility="@{trailersModel.trailerCount > 0 ? View.VISIBLE : View.GONE}" />
+
+                                    <ImageView
+                                        android:id="@+id/trailer1_iv"
+                                        style="@style/trailers_image"
+                                        android:onClick="onTrailerClick"
+                                        android:tag="@{trailersModel.videoId[1]}"
+                                        android:visibility="@{trailersModel.trailerCount > 1 ? View.VISIBLE : View.GONE}"
+                                        app:thumbUrl="@{trailersModel.trailerThumb[1]}" />
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic_play_circle"
+                                        android:visibility="@{trailersModel.trailerCount > 1 ? View.VISIBLE : View.GONE}" />
+
+                                    <ImageView
+                                        android:id="@+id/trailer2_iv"
+                                        style="@style/trailers_image"
+                                        android:onClick="onTrailerClick"
+                                        android:tag="@{trailersModel.videoId[2]}"
+                                        android:visibility="@{trailersModel.trailerCount > 2 ? View.VISIBLE : View.GONE}"
+                                        app:thumbUrl="@{trailersModel.trailerThumb[2]}" />
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic_play_circle"
+                                        android:visibility="@{trailersModel.trailerCount > 2 ? View.VISIBLE : View.GONE}" />
+
+                                    <ImageView
+                                        android:id="@+id/trailer3_iv"
+                                        style="@style/trailers_image"
+                                        android:onClick="onTrailerClick"
+                                        android:tag="@{trailersModel.videoId[3]}"
+                                        android:visibility="@{trailersModel.trailerCount > 3 ? View.VISIBLE : View.GONE}"
+                                        app:thumbUrl="@{trailersModel.trailerThumb[3]}" />
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic_play_circle"
+                                        android:visibility="@{trailersModel.trailerCount > 3 ? View.VISIBLE : View.GONE}" />
+
+                                    <ImageView
+                                        android:id="@+id/trailer4_iv"
+                                        style="@style/trailers_image"
+                                        android:onClick="onTrailerClick"
+                                        android:tag="@{trailersModel.videoId[4]}"
+                                        android:visibility="@{trailersModel.trailerCount > 4 ? View.VISIBLE : View.GONE}"
+                                        app:thumbUrl="@{trailersModel.trailerThumb[4]}" />
+
+                                    <View
+                                        android:layout_width="16dp"
+                                        android:layout_height="match_parent" />
+
+                                </TableRow>
+
+                                <TableRow>
+
+                                    <View />
+
+                                    <View />
+
+                                    <TextView
+                                        android:id="@+id/trailer_title0_tv"
+                                        style="@style/trailer_title"
+                                        android:text="@{trailersModel.name[0]}" />
+
+                                    <View />
+
+                                    <TextView
+                                        android:id="@+id/trailer_title1_tv"
+                                        style="@style/trailer_title"
+                                        android:text="@{trailersModel.name[1]}" />
+
+                                    <View />
+
+                                    <TextView
+                                        android:id="@+id/trailer_title2_tv"
+                                        style="@style/trailer_title"
+                                        android:text="@{trailersModel.name[2]}" />
+
+                                    <View />
+
+                                    <TextView
+                                        android:id="@+id/trailer_title3_tv"
+                                        style="@style/trailer_title"
+                                        android:text="@{trailersModel.name[3]}" />
+
+                                    <View />
+
+                                    <TextView
+                                        android:id="@+id/trailer_title4_tv"
+                                        style="@style/trailer_title"
+                                        android:text="@{trailersModel.name[4]}" />
+                                </TableRow>
+                            </TableLayout>
+                        </HorizontalScrollView>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <!--TRAILERS CARD-->
+
+                <!--REVIEWS CARDs-->
+                <android.support.v7.widget.CardView style="@style/cards_details">
+
+                    <LinearLayout
+                        style="@style/linear_layout_defaults"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:id="@+id/reviews_title_tv"
+                            style="@style/card_title"
+                            android:text="@string/detail_reviews" />
+
+                        <TextView
+                            style="@style/card_text_content"
+                            android:text="@string/no_reviews"
+                            android:visibility="@{noReviews ? View.VISIBLE : View.GONE}" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/reviews_rv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="horizontal" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <!--REVIEWS CARDs-->
+
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
+</layout>

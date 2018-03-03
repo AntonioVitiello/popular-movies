@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Main Activity specific settings-->
+    <integer name="gridNumColumns">2</integer>
+
+    <!--Max character number for trailer name-->
+    <integer name="max_trailer_name_length">25</integer>
+
+    <!--Max number of characters in a review comment-->
+    <integer name="max_review_comment_chars">140</integer>
+
+</resources>

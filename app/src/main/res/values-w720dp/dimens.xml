@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Poster image properties-->
+    <dimen name="poster_width">160dp</dimen>
+    <dimen name="poster_height">239dp</dimen>
+</resources>

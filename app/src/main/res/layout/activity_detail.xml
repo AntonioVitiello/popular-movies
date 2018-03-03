@@ -4,153 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="mymodel" type="com.udacity.popularmovie.model.DetailActivityModel" />
+
+        <variable
+            name="detailModel"
+            type="com.udacity.popularmovie.model.DetailModel" />
     </data>
 
-    <ScrollView
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".DetailActivity">
 
-        <LinearLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="@dimen/app_bar_height"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:elevation="@dimen/poster_elevation"
-                app:cardCornerRadius="@dimen/poster_card_corner_radius"
-                app:contentPaddingBottom="@dimen/poster_content_padding"
-                app:contentPaddingTop="@dimen/poster_content_padding">
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleTextAppearance="@style/collapsed_text_appearance"
+                app:contentScrim="@color/colorPrimary"
+                app:expandedTitleTextAppearance="@style/expanded_text_appearance"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@{detailModel.title}">
 
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/detail_poster_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:adjustViewBounds="true"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:posterUrl="@{mymodel.posterPath}"
-                        tools:src="@drawable/sample" />
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="32dp"
-                        android:text="@string/detail_rating"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/detail_poster_iv"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/detail_rating_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="@{mymodel.rating}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/detail_poster_iv"
-                        app:layout_constraintTop_toBottomOf="@+id/textView"
-                        tools:text="6.21" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="32dp"
-                        android:text="@string/detail_release_date"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/detail_poster_iv"
-                        app:layout_constraintTop_toBottomOf="@+id/detail_rating_tv" />
-
-                    <TextView
-                        android:id="@+id/detail_release_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="32dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="@{mymodel.releaseDate}"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/detail_poster_iv"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2"
-                        app:layout_constraintVertical_bias="0.0"
-                        tools:text="2018-02-21" />
-
-                </android.support.constraint.ConstraintLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:elevation="@dimen/poster_elevation"
-                app:cardCornerRadius="@dimen/poster_card_corner_radius"
-                app:contentPaddingBottom="@dimen/poster_content_padding"
-                app:contentPaddingTop="@dimen/poster_content_padding">
-
-                <LinearLayout
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:background="@color/colorPrimaryLight"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.5"
+                    app:posterUrl="@{detailModel.backdropPath}"
+                    tools:src="@drawable/im_poster_sample" />
 
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/detail_synopsis"
-                        android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/detail_synopsis_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="4dp"
-                        android:text="@{mymodel.synopsis}"
-                        tools:text="Lorem ipsum sictum fatut est dolcet et vaquo. Parlami o diva dell'ira funesta del pelide Achille che fece una palla di pello pollo proprio..." />
-                </LinearLayout>
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/detail_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-            </android.support.v7.widget.CardView>
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
 
-        </LinearLayout>
-    </ScrollView>
+
+        <!--DETAIL CONTENT, CONTAINS ALL CARDS-->
+        <include
+            android:id="@+id/content"
+            layout="@layout/activity_detail_content"
+            app:detailModel="@{detailModel}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+        <!--FLOATING ACTION BUTTON-->
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/fab_margin_right"
+            android:clickable="true"
+            android:onClick="onClickFab"
+            android:src="@{detailModel.isFavorite ? @drawable/ic_fab_star_on : @drawable/ic_fab_star_off}"
+            app:backgroundTint="@color/colorAccent"
+            app:borderWidth="0dp"
+            app:elevation="@dimen/activity_horizontal_margin"
+            app:fabSize="normal"
+            app:layout_anchor="@id/appBarLayout"
+            app:layout_anchorGravity="bottom|end"
+            app:pressedTranslationZ="@dimen/activity_horizontal_margin" />
+        <!--FLOATING ACTION BUTTON-->
+        <!--android:src="@{detailModel.fabDrawable}"-->
+
+    </android.support.design.widget.CoordinatorLayout>
 </layout>
