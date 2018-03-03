@@ -12,8 +12,10 @@ TMDB_API_KEY="your-pi-key-value-abcd1234567890"
 Environment variable is made up of a key and a value of this form:
 TMDB_API_KEY="your-pi-key-value-abcd1234567890"
 
-I would also like to point out that in this project I have used an image from https://goo.gl/ccLeWY like placeholder and like launcher icon.
-
+I would also like to point out that in this project I have used an image from: http://www.freegreatdesign.com/vector/film-element-vector-material-4-5749
+used like error placeholder
+and others free images from:
+https://pixabay.com/it/
 
 ### Udacity Honor Code
 
