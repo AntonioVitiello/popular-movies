@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 
 import com.udacity.popularmovie.adapter.FavoritesAdapter;
@@ -124,7 +126,14 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         TmdbMovie result = adapter instanceof FavoritesAdapter ?
                 ((FavoritesAdapter) adapter).buildResult(position) : mResults.get(position);
         intent.putExtra(DetailActivity.KEY_TMDB_RESULT, result);
-        startActivity(intent);
+
+        // Manage poster transition
+        String transitionName = getString(R.string.transition_name);
+        ImageView poster = view.findViewById(R.id.poster_iv);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), poster, transitionName);
+
+        // Start Detail Activity
+        startActivity(intent, options.toBundle());
     }
 
     public void updateData(List<TmdbMovie> results, int serviceCode) {

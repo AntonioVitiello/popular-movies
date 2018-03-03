@@ -67,4 +67,7 @@
     <!--Content Provider Authority-->
     <string name="content_authority">com.udacity.popularmovie</string>
 
+    <!--Poster transition name-->
+    <string name="transition_name">poster_transition</string>
+
 </resources>

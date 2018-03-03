@@ -17,6 +17,7 @@
         android:background="@color/colorPrimaryLight"
         android:foreground="?android:attr/selectableItemBackground"
         android:scaleType="fitXY"
-        tools:src="@drawable/im_poster_sample" />
+        tools:src="@drawable/im_poster_sample"
+        android:transitionName="@string/transition_name" />
 
 </android.support.v7.widget.CardView>
