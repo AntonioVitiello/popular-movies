@@ -25,9 +25,13 @@ I understand that Udacity will check my submission for plagiarism and that failu
 
 ![Home section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Home.png)
 ![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Home_02.png)
+
 ![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Detail.png)
 ![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Detail_02.png)
+
 ![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Trailers.png)
 ![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Reviews.png)
+
 ![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Home_Landscape.png)
+
 ![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Trailers_Landscape.png)
