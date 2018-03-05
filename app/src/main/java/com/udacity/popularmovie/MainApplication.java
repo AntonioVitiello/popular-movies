@@ -2,6 +2,7 @@ package com.udacity.popularmovie;
 
 import android.app.Application;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 
 import com.udacity.popularmovie.log.TimberLogImplementation;
 
@@ -30,10 +31,12 @@ public class MainApplication extends Application {
         mResources = this.getApplicationContext().getResources();
     }
 
+    @NonNull
     public static String getStringResource(int resId) {
         return mResources.getString(resId);
     }
 
+    @NonNull
     public static String getStringResource(int resId, Object... formatArgs) {
         return mResources.getString(resId, formatArgs);
     }
