@@ -21,7 +21,6 @@ import com.udacity.popularmovie.net.json.movies.TmdbMovie;
  */
 
 public class FavoritesAdapter extends CursorAdapter {
-    private static final String LOG_TAG = "FavoritesAdapter";
     private final LayoutInflater mInflater;
     private int columnTitleIndex;
     private int columnMovieIdIndex;

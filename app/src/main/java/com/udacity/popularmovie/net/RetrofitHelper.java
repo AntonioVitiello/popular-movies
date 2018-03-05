@@ -1,7 +1,5 @@
 package com.udacity.popularmovie.net;
 
-import com.util.Log;
-
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
@@ -11,6 +9,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import timber.log.Timber;
 
 /**
  * Created by Antonio on 20/02/2018.
@@ -18,7 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
     public static final String SERVICE_PARAM = "service";
-    private static final String LOG_TAG = "RetrofitHelper";
     private String mBaseUrl;
     private int mServiceId;
 
@@ -48,12 +46,12 @@ public class RetrofitHelper {
             Request request = chain.request();
 
             long t1 = System.nanoTime();
-            Log.d(LOG_TAG, "Sending request %s on %s%n%s", request.url(), chain.connection(), request.headers());
+            Timber.d("Sending request %s on %s%n%s", request.url(), chain.connection(), request.headers());
 
             Response response = chain.proceed(request);
 
             long t2 = System.nanoTime();
-            Log.d(LOG_TAG, "Received response for %s in %.1fms%n%s", response.request().url(), (t2 - t1) / 1e6d, response.headers());
+            Timber.d("Received response for %s in %.1fms%n%s", response.request().url(), (t2 - t1) / 1e6d, response.headers());
 
             return response;
         }

@@ -19,8 +19,6 @@ import java.util.List;
  */
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHolder> {
-    private static final String LOG_TAG = "ReviewsAdapter";
-
     private List<TmdbReview> mReviews = new ArrayList<>();
 
     public ReviewsAdapter(@NonNull List<TmdbReview> results) {

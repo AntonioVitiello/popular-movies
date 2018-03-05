@@ -28,7 +28,6 @@ import static com.udacity.popularmovie.MainActivityFragment.TYPE_TOP_RATED;
  */
 
 public class TmdbUtils {
-    private static final String LOG_TAG = "TmdbUtils";
     private static TmdbUtils sInstance;
     private static Toast mToast;
     public String mTmdbPosterBaseUrl;

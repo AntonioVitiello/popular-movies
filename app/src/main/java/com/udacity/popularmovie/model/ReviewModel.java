@@ -9,7 +9,6 @@ import com.udacity.popularmovie.net.json.reviews.TmdbReview;
  */
 
 public class ReviewModel {
-    private static final String LOG_TAG = "ReviewModel";
     private static final String sEmptyComment = MainApplication.getStringResource(R.string.review_no_comment);
     private static final int sMaxCommentChars = MainApplication.getIntResource(R.integer.max_review_comment_chars);
 

@@ -11,10 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.util.Log;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String MAIN_FRAGMENT_TAG = "main_activity_fragment";
     private MainActivityFragment mMainFragment;
     private Toast mToast;
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
             default:
                 displayItemAsSelect = false;
-                Log.e(LOG_TAG, "Unable to manage menu action: " + item.toString());
+                Timber.d("Unable to manage menu action: " + item.toString());
         }
 
 

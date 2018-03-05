@@ -35,18 +35,17 @@ import com.udacity.popularmovie.net.json.movies.TmdbMovie;
 import com.udacity.popularmovie.net.json.reviews.TmdbReview;
 import com.udacity.popularmovie.net.json.reviews.TmdbReviewsContainer;
 import com.udacity.popularmovie.net.json.trailers.TmdbTrailersContainer;
-import com.util.Log;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
+import timber.log.Timber;
 
 import static com.udacity.popularmovie.data.FavoritesContract.FavoritesEntry.CONTENT_URI;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String KEY_TMDB_RESULT = "tmdb_result";
-    private static final String LOG_TAG = "DetailActivity";
     private static final String KEY_INSTANCE_STATE_PARC = "parcelable_key_save_state";
     private ActivityDetailBinding mBinding;
     private TmdbMovie mResult;
@@ -54,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
     private retrofit2.Callback<TmdbTrailersContainer> trailersCallback = new retrofit2.Callback<TmdbTrailersContainer>() {
         @Override
         public void onResponse(Call<TmdbTrailersContainer> call, Response<TmdbTrailersContainer> response) {
-            Log.d(LOG_TAG, "TMDb Request URL: %s", call.request().url());
+            Timber.d("TMDb Request URL: %s", call.request().url());
             if (response.isSuccessful()) {
                 TmdbTrailersContainer trailersContainer = response.body();
                 TrailersModel trailersModel = new TrailersModel(trailersContainer.getResults());
@@ -62,20 +61,20 @@ public class DetailActivity extends AppCompatActivity {
             } else {
                 // handle request errors depending on status code...
                 int statusCode = response.code();
-                Log.e(LOG_TAG, "Received HTTP %d on TMDb trailers data request.", statusCode);
+                Timber.d("Received HTTP %d on TMDb trailers data request.", statusCode);
             }
         }
 
         @Override
         public void onFailure(Call<TmdbTrailersContainer> call, Throwable tr) {
-            Log.e(LOG_TAG, "Error loading JSON from TMDb: ", tr);
+            Timber.e(tr, "Error loading JSON from TMDb");
         }
     };
 
     private retrofit2.Callback<TmdbReviewsContainer> reviewsCallback = new retrofit2.Callback<TmdbReviewsContainer>() {
         @Override
         public void onResponse(Call<TmdbReviewsContainer> call, Response<TmdbReviewsContainer> response) {
-            Log.d(LOG_TAG, "TMDb Request URL: %s", call.request().url());
+            Timber.d("TMDb Request URL: %s", call.request().url());
             if (response.isSuccessful()) {
                 TmdbReviewsContainer reviewsContainer = response.body();
                 List<TmdbReview> results = reviewsContainer.getResults();
@@ -95,13 +94,13 @@ public class DetailActivity extends AppCompatActivity {
             } else {
                 // handle request errors depending on status code...
                 int statusCode = response.code();
-                Log.e(LOG_TAG, "Received HTTP %d on TMDb reviews data request.", statusCode);
+                Timber.d("Received HTTP %d on TMDb reviews data request.", statusCode);
             }
         }
 
         @Override
         public void onFailure(Call<TmdbReviewsContainer> call, Throwable tr) {
-            Log.e(LOG_TAG, "Error loading JSON from TMDb: ", tr);
+            Timber.e(tr, "Error loading JSON from TMDb");
         }
     };
 
@@ -255,7 +254,7 @@ public class DetailActivity extends AppCompatActivity {
             videoUrl = Uri.parse(getString(R.string.trailer_video_url_browser, videoId));
             intent = new Intent(Intent.ACTION_VIEW, videoUrl);
         }
-        Log.d(LOG_TAG, "Opening Youtube video: %s", intent.getDataString());
+        Timber.d("Opening Youtube video: %s", intent.getDataString());
         startActivity(intent);
     }
 
@@ -270,7 +269,7 @@ public class DetailActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
-        Log.d(LOG_TAG, "Opening review in browser: %s", intent.getDataString());
+        Timber.d("Opening review in browser: %s", intent.getDataString());
     }
 
     /**
@@ -318,7 +317,7 @@ public class DetailActivity extends AppCompatActivity {
         contentValues.put(FavoritesContract.FavoritesEntry.COLUMN_VOTE_AVERAGE, mResult.getVoteAverage());
         Uri uri = getContentResolver().insert(CONTENT_URI, contentValues);
         Snackbar.make(mBinding.coordinatorLayout, R.string.movie_added, Snackbar.LENGTH_SHORT).show();
-        Log.d(LOG_TAG, "Movie inserted in Favorite DB: %s ", uri.toString());
+        Timber.d("Movie inserted in Favorite DB: %s ", uri.toString());
     }
 
     /**
@@ -329,7 +328,7 @@ public class DetailActivity extends AppCompatActivity {
         String[] selectionArgs = {String.valueOf(mResult.getId())};
         int count = getContentResolver().delete(CONTENT_URI, selection, selectionArgs);
         Snackbar.make(mBinding.coordinatorLayout, R.string.movie_removed, Snackbar.LENGTH_SHORT).show();
-        Log.d(LOG_TAG, "Movie %1$d deleted from Favorite DB", mResult.getId());
+        Timber.d("Movie %1$d deleted from Favorite DB", mResult.getId());
     }
 
     /**
@@ -347,7 +346,7 @@ public class DetailActivity extends AppCompatActivity {
             _id = cursor.getInt(0);
             cursor.close();
         }
-        Log.d(LOG_TAG, "isFavorite: %s", (_id != -1 ? "Yes" : "No"));
+        Timber.d("isFavorite: %s", (_id != -1 ? "Yes" : "No"));
         return _id != -1;
     }
 

@@ -20,7 +20,6 @@ import com.udacity.popularmovie.data.loader.FavoritesLoader;
 import com.udacity.popularmovie.net.TmdbUtils;
 import com.udacity.popularmovie.net.json.movies.TmdbMovie;
 import com.udacity.popularmovie.net.json.movies.TmdbMoviesContainer;
-import com.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +28,7 @@ import okhttp3.HttpUrl;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 /**
  * Created by Antonio on 20/02/2018.
@@ -38,7 +38,6 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
     public static final int TYPE_MOST_POPULAR = 0;
     public static final int TYPE_TOP_RATED = 1;
     public static final int TYPE_FAVORITES = 2;
-    private static final String LOG_TAG = "MainActivityFragment";
     private static final String KEY_TMDB_RESULTS = "tmdb_results_key";
     private static final String KEY_CURRENT_SERVICE = "current_service";
     private static final String KEY_GRID_POSITION = "selected_position";
@@ -53,7 +52,7 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         @Override
         public void onResponse(Call<TmdbMoviesContainer> call, Response<TmdbMoviesContainer> response) {
             HttpUrl url = call.request().url();
-            Log.d(LOG_TAG, "HTTP Request: %s", url.toString());
+            Timber.d("HTTP Request: %s", url.toString());
             if (response.isSuccessful()) {
                 int serviceType = TmdbUtils.getServiceType(url.pathSegments());
                 mResults = response.body().getResults();
@@ -61,13 +60,13 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
             } else {
                 // handle request errors depending on status code...
                 int statusCode = response.code();
-                Log.e(LOG_TAG, "Received HTTP %d on %s", statusCode, url.toString());
+                Timber.d("Received HTTP %d on %s", statusCode, url.toString());
             }
         }
 
         @Override
         public void onFailure(Call<TmdbMoviesContainer> call, Throwable tr) {
-            Log.e(LOG_TAG, "Error loading JSON from TMDb: ", tr);
+            Timber.e(tr, "Error loading JSON from TMDb");
         }
     };
 

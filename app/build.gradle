@@ -43,4 +43,7 @@ dependencies {
 
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.6.1'
 }

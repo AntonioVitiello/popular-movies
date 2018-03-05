@@ -3,7 +3,7 @@ package com.udacity.popularmovie;
 import android.app.Application;
 import android.content.res.Resources;
 
-import com.util.Log;
+import com.udacity.popularmovie.log.TimberLogImplementation;
 
 /**
  * Created by Antonio on 20/02/2018.
@@ -18,9 +18,12 @@ public class MainApplication extends Application {
         super.onCreate();
 
         // Initialize the logger
+        TimberLogImplementation.init("Antonio");
+/*  My Logger initialization
         Log.init(BuildConfig.DEBUG,
                 getString(R.string.log_tag),
                 getResources().getBoolean(R.bool.log_tag_concat));
+*/
 
         mResources = this.getApplicationContext().getResources();
     }

@@ -21,7 +21,6 @@ import java.util.List;
  */
 
 public class PostersAdapter extends ArrayAdapter<TmdbMovie> {
-    private static final String LOG_TAG = PostersAdapter.class.getSimpleName();
     private final LayoutInflater mInflater;
 
     /**
