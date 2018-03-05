@@ -17,9 +17,11 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Initialize the logger
+        // Timber initialization
         TimberLogImplementation.init("Antonio");
-/*  My Logger initialization
+
+/*
+        // My Logger initialization
         Log.init(BuildConfig.DEBUG,
                 getString(R.string.log_tag),
                 getResources().getBoolean(R.bool.log_tag_concat));

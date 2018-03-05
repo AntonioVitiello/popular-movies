@@ -9,14 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import com.udacity.popularmovie.events.ClickMenuEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import timber.log.Timber;
 
+import static com.udacity.popularmovie.MainActivityFragment.TYPE_FAVORITES;
+import static com.udacity.popularmovie.MainActivityFragment.TYPE_MOST_POPULAR;
+import static com.udacity.popularmovie.MainActivityFragment.TYPE_TOP_RATED;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String MAIN_FRAGMENT_TAG = "main_activity_fragment";
-    private MainActivityFragment mMainFragment;
-    private Toast mToast;
     private BottomNavigationView mBottomNavigationView;
 
     @Override
@@ -29,12 +34,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(MAIN_FRAGMENT_TAG);
         if (fragment == null) {
-            mMainFragment = new MainActivityFragment();
+            MainActivityFragment mainFragment = new MainActivityFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_fragment, mMainFragment, MAIN_FRAGMENT_TAG)
+                    .replace(R.id.main_fragment, mainFragment, MAIN_FRAGMENT_TAG)
                     .commit();
-        } else {
-            mMainFragment = (MainActivityFragment) fragment;
         }
     }
 
@@ -48,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu, this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.posters, menu);
         return true;
     }
@@ -62,22 +64,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         boolean displayItemAsSelect = true;
+        EventBus eventBus = EventBus.getDefault();
 
         switch (item.getItemId()) {
             case R.id.mi_popular:
-                mMainFragment.retrieveMostPopular();
+                eventBus.post(new ClickMenuEvent(TYPE_MOST_POPULAR));
                 break;
             case R.id.mi_top_rated:
-                mMainFragment.retrieveTopRated();
+                eventBus.post(new ClickMenuEvent(TYPE_TOP_RATED));
                 break;
             case R.id.mi_favorites:
-                mMainFragment.showFavorites();
+                eventBus.post(new ClickMenuEvent(TYPE_FAVORITES));
                 break;
             default:
                 displayItemAsSelect = false;
                 Timber.d("Unable to manage menu action: " + item.toString());
         }
-
 
         return displayItemAsSelect;
     }

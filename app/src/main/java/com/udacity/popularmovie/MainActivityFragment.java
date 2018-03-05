@@ -17,9 +17,14 @@ import android.widget.ListAdapter;
 import com.udacity.popularmovie.adapter.FavoritesAdapter;
 import com.udacity.popularmovie.adapter.PostersAdapter;
 import com.udacity.popularmovie.data.loader.FavoritesLoader;
+import com.udacity.popularmovie.events.ClickMenuEvent;
 import com.udacity.popularmovie.net.TmdbUtils;
 import com.udacity.popularmovie.net.json.movies.TmdbMovie;
 import com.udacity.popularmovie.net.json.movies.TmdbMoviesContainer;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +46,7 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
     private static final String KEY_TMDB_RESULTS = "tmdb_results_key";
     private static final String KEY_CURRENT_SERVICE = "current_service";
     private static final String KEY_GRID_POSITION = "selected_position";
-    FavoritesLoader mFavoritesLoader;
+    private FavoritesLoader mFavoritesLoader;
     private int mCurrentService = -1;
     private GridView mGridView;
     private PostersAdapter mPostersAdapter;
@@ -105,13 +110,28 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // Register EventBus
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         refreshView(false);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        // Unregister EventBus
+        EventBus.getDefault().unregister(this);
+    }
+
     /**
      * On poster click start Activity Detail
+     * Implementation method for interface AdapterView.OnItemClickListener
      *
      * @param adapterView
      * @param view
@@ -168,36 +188,40 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         }
     }
 
+    // EventBus received
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onClickMenuEvent(ClickMenuEvent event){
+        retrieve(event.getServiceRequested());
+        EventBus.getDefault().removeStickyEvent(event);
+    }
+
     public void retrieveMostPopular() {
         retrieve(TYPE_MOST_POPULAR);
     }
 
-    public void retrieveTopRated() {
-        retrieve(TYPE_TOP_RATED);
-    }
-
-    private void retrieve(int serviceCode) {
+    private void retrieve(int serviceRequested) {
         // Call TMDb api only if the necessary data are not already present
-        switch (mCurrentService - serviceCode) {
-            case 0:
-                refreshView(true);
-                break;
-            default:
-                // Check connettivity before lauch search
-                if (TmdbUtils.checkConnection(getActivity())) {
-                    switch (serviceCode) {
-                        case TYPE_MOST_POPULAR:
-                            // Enqueue MostPolpular Request for TMDb
-                            TmdbUtils.mostPopularRequest(tmdbCallback);
-                            break;
-                        case TYPE_TOP_RATED:
-                            // Enqueue TopRated Request for TMDb
-                            TmdbUtils.topRatedRequest(tmdbCallback);
-                            break;
-                        default:
-                            throw new UnsupportedOperationException("Unknown search type: " + serviceCode);
-                    }
-                }
+        if (mCurrentService == serviceRequested) {
+            refreshView(true);
+            return;
+        }
+        // Check connettivity before lauch search
+        if (TmdbUtils.checkConnection(getActivity())) {
+            switch (serviceRequested) {
+                case TYPE_MOST_POPULAR:
+                    // Enqueue MostPolpular Request for TMDb
+                    TmdbUtils.mostPopularRequest(tmdbCallback);
+                    break;
+                case TYPE_TOP_RATED:
+                    // Enqueue TopRated Request for TMDb
+                    TmdbUtils.topRatedRequest(tmdbCallback);
+                    break;
+                case TYPE_FAVORITES:
+                    showFavorites();
+                    break;
+                default:
+                    throw new UnsupportedOperationException("Unknown service type: " + serviceRequested);
+            }
         }
     }
 
