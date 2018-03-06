@@ -66,8 +66,7 @@ public class PostersAdapter extends ArrayAdapter<TmdbMovie> {
         ViewHolder holder;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.poster_item, parent, false);
-            holder = new ViewHolder();
-            holder.imageView = convertView.findViewById(R.id.poster_iv);
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -93,8 +92,12 @@ public class PostersAdapter extends ArrayAdapter<TmdbMovie> {
     }
 
 
-    class ViewHolder {
-        ImageView imageView;
+    public static class ViewHolder {
+        private ImageView imageView;
+
+        public ViewHolder(View view) {
+            imageView = view.findViewById(R.id.poster_iv);
+        }
     }
 
 }

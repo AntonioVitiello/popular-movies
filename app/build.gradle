@@ -49,4 +49,7 @@ dependencies {
 
     //EventBus
     implementation 'org.greenrobot:eventbus:3.1.1'
+
+    // Stetho SQLite DEBUG bridge
+    implementation 'com.facebook.stetho:stetho:1.5.0'
 }

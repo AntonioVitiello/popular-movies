@@ -49,6 +49,14 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
     private List<TmdbMovie> mResults = new ArrayList<>();
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        // initialize loader
+        mFavoritesLoader = new FavoritesLoader(getActivity(), mFavoritesAdapter);
+        getLoaderManager().initLoader(FavoritesLoader.FAVORITES_LOADER_ID, null, mFavoritesLoader);
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mGridView = rootView.findViewById(R.id.posters_grid);
@@ -62,10 +70,6 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         } else {
             mGridView.setAdapter(mPostersAdapter);
         }
-
-        // Init loader
-        mFavoritesLoader = new FavoritesLoader(getActivity(), mFavoritesAdapter);
-        getLoaderManager().initLoader(FavoritesLoader.FAVORITES_LOADER_ID, null, mFavoritesLoader);
 
         return rootView;
     }

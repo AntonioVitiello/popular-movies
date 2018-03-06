@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 
+import com.facebook.stetho.Stetho;
 import com.udacity.popularmovie.log.TimberLogImplementation;
 
 /**
@@ -29,6 +30,14 @@ public class MainApplication extends Application {
 */
 
         mResources = this.getApplicationContext().getResources();
+
+        // Initialize Stetho SQLite debug bridge
+        // chrome://inspect/#devices
+        // see: http://facebook.github.io/stetho/
+        Stetho.initialize(Stetho.newInitializerBuilder(this)
+                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                .build());
     }
 
     @NonNull

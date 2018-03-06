@@ -22,13 +22,13 @@ import com.udacity.popularmovie.net.json.movies.TmdbMovie;
 
 public class FavoritesAdapter extends CursorAdapter {
     private final LayoutInflater mInflater;
-    private int columnTitleIndex;
-    private int columnMovieIdIndex;
-    private int columnOverviewIndex;
-    private int columnPosterPathIndex;
-    private int columnReleaseDateIndex;
-    private int columnVoteAverageIndex;
-    private int columnBackdropIndex;
+    private int titleColumnIndex;
+    private int movieIdColumnIndex;
+    private int overviewColumnIndex;
+    private int posterPathColumnIndex;
+    private int releaseDateColumnIndex;
+    private int voteAverageColumnIndex;
+    private int backdropColumnIndex;
 
     public FavoritesAdapter(Context context, Cursor cursor) {
         super(context, cursor, false);
@@ -38,13 +38,13 @@ public class FavoritesAdapter extends CursorAdapter {
     @Override
     public Cursor swapCursor(Cursor newCursor) {
         if (newCursor != null) {
-            columnMovieIdIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_MOVIE_ID);
-            columnPosterPathIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_POSTER_PATH);
-            columnTitleIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_TITLE);
-            columnBackdropIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_BACKDROP_PATH);
-            columnOverviewIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_OVERVIEW);
-            columnReleaseDateIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_RELEASE_DATE);
-            columnVoteAverageIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_VOTE_AVERAGE);
+            movieIdColumnIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_MOVIE_ID);
+            posterPathColumnIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_POSTER_PATH);
+            titleColumnIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_TITLE);
+            backdropColumnIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_BACKDROP_PATH);
+            overviewColumnIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_OVERVIEW);
+            releaseDateColumnIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_RELEASE_DATE);
+            voteAverageColumnIndex = newCursor.getColumnIndex(FavoritesContract.FavoritesEntry.COLUMN_VOTE_AVERAGE);
         }
         return super.swapCursor(newCursor);
     }
@@ -52,8 +52,7 @@ public class FavoritesAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         View rootView = mInflater.inflate(R.layout.poster_item, parent, false);
-        ViewHolder holder = new ViewHolder();
-        holder.imageView = rootView.findViewById(R.id.poster_iv);
+        ViewHolder holder = new ViewHolder(rootView);
         rootView.setTag(holder);
         return rootView;
     }
@@ -61,7 +60,7 @@ public class FavoritesAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder holder = (ViewHolder) view.getTag();
-        Uri posterUrl = TmdbUtils.buildImageUrl(cursor.getString(columnPosterPathIndex));
+        Uri posterUrl = TmdbUtils.buildImageUrl(cursor.getString(posterPathColumnIndex));
         Picasso.with(mContext)
                 .load(posterUrl)
                 .error(R.drawable.im_poster_placeholder_error)
@@ -86,18 +85,22 @@ public class FavoritesAdapter extends CursorAdapter {
     public TmdbMovie buildResult(int position) {
         mCursor.moveToPosition(position);
         TmdbMovie result = new TmdbMovie();
-        result.setId(mCursor.getInt(columnMovieIdIndex));
-        result.setPosterPath(mCursor.getString(columnPosterPathIndex));
-        result.setTitle(mCursor.getString(columnTitleIndex));
-        result.setBackdropPath(mCursor.getString(columnBackdropIndex));
-        result.setOverview(mCursor.getString(columnOverviewIndex));
-        result.setReleaseDate(mCursor.getString(columnReleaseDateIndex));
-        result.setVoteAverage(mCursor.getDouble(columnVoteAverageIndex));
+        result.setId(mCursor.getInt(movieIdColumnIndex));
+        result.setPosterPath(mCursor.getString(posterPathColumnIndex));
+        result.setTitle(mCursor.getString(titleColumnIndex));
+        result.setBackdropPath(mCursor.getString(backdropColumnIndex));
+        result.setOverview(mCursor.getString(overviewColumnIndex));
+        result.setReleaseDate(mCursor.getString(releaseDateColumnIndex));
+        result.setVoteAverage(mCursor.getDouble(voteAverageColumnIndex));
         return result;
     }
 
-    class ViewHolder {
-        ImageView imageView;
+    public static class ViewHolder {
+        private final ImageView imageView;
+
+        public ViewHolder(View rootView) {
+            imageView = rootView.findViewById(R.id.poster_iv);
+        }
     }
 
 }

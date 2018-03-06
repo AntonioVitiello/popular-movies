@@ -2,6 +2,7 @@ package com.udacity.popularmovie.data.loader;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -18,6 +19,15 @@ public class FavoritesLoader implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final int FAVORITES_LOADER_ID = 0;
     private Context mContext;
     private FavoritesAdapter mFavoritesAdapter;
+    private final String[] mProjection = new String[]{
+            FavoritesContract.FavoritesEntry._ID,
+            FavoritesContract.FavoritesEntry.COLUMN_MOVIE_ID,
+            FavoritesContract.FavoritesEntry.COLUMN_POSTER_PATH,
+            FavoritesContract.FavoritesEntry.COLUMN_TITLE,
+            FavoritesContract.FavoritesEntry.COLUMN_BACKDROP_PATH,
+            FavoritesContract.FavoritesEntry.COLUMN_OVERVIEW,
+            FavoritesContract.FavoritesEntry.COLUMN_RELEASE_DATE,
+            FavoritesContract.FavoritesEntry.COLUMN_VOTE_AVERAGE};
 
 
     public FavoritesLoader(Context context, FavoritesAdapter adapter) {
@@ -29,21 +39,8 @@ public class FavoritesLoader implements LoaderManager.LoaderCallbacks<Cursor> {
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle args) {
         switch (loaderId) {
             case FAVORITES_LOADER_ID:
-                String[] projection = {
-                        FavoritesContract.FavoritesEntry._ID,
-                        FavoritesContract.FavoritesEntry.COLUMN_MOVIE_ID,
-                        FavoritesContract.FavoritesEntry.COLUMN_POSTER_PATH,
-                        FavoritesContract.FavoritesEntry.COLUMN_TITLE,
-                        FavoritesContract.FavoritesEntry.COLUMN_BACKDROP_PATH,
-                        FavoritesContract.FavoritesEntry.COLUMN_OVERVIEW,
-                        FavoritesContract.FavoritesEntry.COLUMN_RELEASE_DATE,
-                        FavoritesContract.FavoritesEntry.COLUMN_VOTE_AVERAGE};
-                return new CursorLoader(mContext,
-                        FavoritesContract.FavoritesEntry.CONTENT_URI,
-                        projection,
-                        null,
-                        null,
-                        null);
+                Uri favoritesUri = FavoritesContract.FavoritesEntry.CONTENT_URI;
+                return new CursorLoader(mContext, favoritesUri, mProjection, null, null, null);
             default:
                 throw new UnsupportedOperationException("Unknown loader id: " + loaderId);
         }
