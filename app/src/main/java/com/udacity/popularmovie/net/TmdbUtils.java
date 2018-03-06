@@ -28,9 +28,9 @@ import static com.udacity.popularmovie.MainActivityFragment.TYPE_TOP_RATED;
  */
 
 public class TmdbUtils {
-    private static TmdbUtils sInstance;
-    private static Toast mToast;
+    private volatile static TmdbUtils sInstance;
     public String mTmdbPosterBaseUrl;
+    private Toast mToast;
     private String mTmdbBaseUrl;
     private TmdbService mService;
 
@@ -72,12 +72,12 @@ public class TmdbUtils {
     public static boolean checkConnection(Context context) {
         boolean isConnected = isConnected(context);
         if (!isConnected) {
-            if (mToast != null) {
-                mToast.cancel();
+            if (getInstance().mToast != null) {
+                getInstance().mToast.cancel();
             }
             String msg = context.getString(R.string.no_connection_msg);
-            mToast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
-            mToast.show();
+            getInstance().mToast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
+            getInstance().mToast.show();
         }
         return isConnected;
     }

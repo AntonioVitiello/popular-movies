@@ -1,4 +1,4 @@
-package com.udacity.popularmovie.events;
+package com.udacity.popularmovie.event;
 
 /**
  * Created by Antonio on 05/03/2018.

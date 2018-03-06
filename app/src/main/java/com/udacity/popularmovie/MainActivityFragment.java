@@ -17,10 +17,11 @@ import android.widget.ListAdapter;
 import com.udacity.popularmovie.adapter.FavoritesAdapter;
 import com.udacity.popularmovie.adapter.PostersAdapter;
 import com.udacity.popularmovie.data.loader.FavoritesLoader;
-import com.udacity.popularmovie.events.ClickMenuEvent;
+import com.udacity.popularmovie.event.ClickMenuEvent;
+import com.udacity.popularmovie.event.TmdbMovieEvent;
 import com.udacity.popularmovie.net.TmdbUtils;
+import com.udacity.popularmovie.net.callback.MovieCallbacks;
 import com.udacity.popularmovie.net.json.movies.TmdbMovie;
-import com.udacity.popularmovie.net.json.movies.TmdbMoviesContainer;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,12 +29,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.HttpUrl;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import timber.log.Timber;
 
 /**
  * Created by Antonio on 20/02/2018.
@@ -52,29 +47,6 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
     private PostersAdapter mPostersAdapter;
     private FavoritesAdapter mFavoritesAdapter;
     private List<TmdbMovie> mResults = new ArrayList<>();
-
-    private Callback<TmdbMoviesContainer> tmdbCallback = new Callback<TmdbMoviesContainer>() {
-        @Override
-        public void onResponse(Call<TmdbMoviesContainer> call, Response<TmdbMoviesContainer> response) {
-            HttpUrl url = call.request().url();
-            Timber.d("HTTP Request: %s", url.toString());
-            if (response.isSuccessful()) {
-                int serviceType = TmdbUtils.getServiceType(url.pathSegments());
-                mResults = response.body().getResults();
-                updateData(mResults, serviceType);
-            } else {
-                // handle request errors depending on status code...
-                int statusCode = response.code();
-                Timber.d("Received HTTP %d on %s", statusCode, url.toString());
-            }
-        }
-
-        @Override
-        public void onFailure(Call<TmdbMoviesContainer> call, Throwable tr) {
-            Timber.e(tr, "Error loading JSON from TMDb");
-        }
-    };
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -188,13 +160,6 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         }
     }
 
-    // EventBus received
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onClickMenuEvent(ClickMenuEvent event){
-        retrieve(event.getServiceRequested());
-        EventBus.getDefault().removeStickyEvent(event);
-    }
-
     public void retrieveMostPopular() {
         retrieve(TYPE_MOST_POPULAR);
     }
@@ -210,11 +175,11 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
             switch (serviceRequested) {
                 case TYPE_MOST_POPULAR:
                     // Enqueue MostPolpular Request for TMDb
-                    TmdbUtils.mostPopularRequest(tmdbCallback);
+                    TmdbUtils.mostPopularRequest(new MovieCallbacks());
                     break;
                 case TYPE_TOP_RATED:
                     // Enqueue TopRated Request for TMDb
-                    TmdbUtils.topRatedRequest(tmdbCallback);
+                    TmdbUtils.topRatedRequest(new MovieCallbacks());
                     break;
                 case TYPE_FAVORITES:
                     showFavorites();
@@ -243,4 +208,29 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         outState.putInt(KEY_GRID_POSITION, mGridView.getFirstVisiblePosition() + 1);
     }
 
+    /**
+     * EventBus received on Toolbar or BottomNavigationView item click
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onClickMenuEvent(ClickMenuEvent event) {
+        retrieve(event.getServiceRequested());
+        // EventBus.getDefault().removeStickyEvent(event);
+    }
+
+    /**
+     * EventBus received on TMDb API Response
+     * TmdbService: movie/popular
+     * TmdbService: movie/top_rated
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTmdbMovieEvent(TmdbMovieEvent event) {
+        List<TmdbMovie> results = event.getResults();
+        int serviceType = event.getServiceType();
+        updateData(results, serviceType);
+        // EventBus.getDefault().removeStickyEvent(event);
+    }
 }
