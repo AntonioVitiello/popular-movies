@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import timber.log.Timber;
 
 /**
  * Created by Antonio on 20/02/2018.
@@ -61,6 +64,9 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mGridView = rootView.findViewById(R.id.posters_grid);
         mGridView.setOnItemClickListener(this);
+
+        // Dinamically calculates number of colums availables
+        // mGridView.setNumColumns(getColumnsCount());
 
         // Set GridView Adapter
         mPostersAdapter = new PostersAdapter(getActivity(), mResults);
@@ -106,6 +112,19 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
     }
 
     /**
+     * Dinamically calculates number of colums availables
+     */
+    private int getColumnsCount() {
+        DisplayMetrics displayMetrics = getActivity().getResources().getDisplayMetrics();
+        float widthDp = displayMetrics.widthPixels / displayMetrics.density;
+        float heigthDp = displayMetrics.heightPixels / displayMetrics.density;
+        int posterWidth = getResources().getInteger(R.integer.poster_width_px);
+        int columnsCount = (int)Math.ceil(widthDp / posterWidth);
+        Timber.d("Display width = %.0fdp; heigth = %.0fdp; columnsCount = %d; posterWidth = %d", widthDp, heigthDp, columnsCount, posterWidth);
+        return columnsCount;
+    }
+
+    /**
      * On poster click start Activity Detail
      * Implementation method for interface AdapterView.OnItemClickListener
      *
@@ -123,7 +142,7 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         intent.putExtra(DetailActivity.KEY_TMDB_RESULT, result);
 
         // Manage poster transition
-        String transitionName = getString(R.string.transition_name);
+        String transitionName = getString(R.string.poster_transition);
         ImageView poster = view.findViewById(R.id.poster_iv);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), poster, transitionName);
 

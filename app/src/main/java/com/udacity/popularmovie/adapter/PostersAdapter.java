@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.udacity.popularmovie.R;
+import com.udacity.popularmovie.animation.TranslateAnimation;
 import com.udacity.popularmovie.net.TmdbUtils;
 import com.udacity.popularmovie.net.json.movies.TmdbMovie;
 
@@ -22,6 +24,8 @@ import java.util.List;
 
 public class PostersAdapter extends ArrayAdapter<TmdbMovie> {
     private final LayoutInflater mInflater;
+    private int mPrevPositon;
+    private boolean mIsScrollingDown = true;
 
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
@@ -70,6 +74,7 @@ public class PostersAdapter extends ArrayAdapter<TmdbMovie> {
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
+            animate(holder, parent);
         }
 
         Uri posterUrl = TmdbUtils.buildImageUrl(tmdbMovie.getPosterPath());
@@ -91,12 +96,33 @@ public class PostersAdapter extends ArrayAdapter<TmdbMovie> {
         return convertView;
     }
 
+    /**
+     * Poster animation: (firstVisiblePosition > mPrevPositon) means gridview is scrolling DOWN
+     * (firstVisiblePosition = mPrevPositon) means take previous scroll direction
+     * @param holder
+     * @param parent
+     */
+    private void animate(ViewHolder holder, ViewGroup parent) {
+        int firstVisiblePosition = ((GridView) parent).getFirstVisiblePosition();
+        if (firstVisiblePosition > mPrevPositon){
+            mIsScrollingDown = true;
+        } else if (firstVisiblePosition < mPrevPositon){
+            mIsScrollingDown = false;
+        }
+        TranslateAnimation.animate(holder, mIsScrollingDown);
+        mPrevPositon = firstVisiblePosition;
+    }
+
 
     public static class ViewHolder {
         private ImageView imageView;
 
         public ViewHolder(View view) {
             imageView = view.findViewById(R.id.poster_iv);
+        }
+
+        public ImageView getImageView() {
+            return imageView;
         }
     }
 

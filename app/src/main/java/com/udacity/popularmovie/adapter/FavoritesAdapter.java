@@ -7,11 +7,13 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.udacity.popularmovie.R;
+import com.udacity.popularmovie.animation.TranslateAnimation;
 import com.udacity.popularmovie.data.FavoritesContract;
 import com.udacity.popularmovie.net.TmdbUtils;
 import com.udacity.popularmovie.net.json.movies.TmdbMovie;
@@ -29,6 +31,9 @@ public class FavoritesAdapter extends CursorAdapter {
     private int releaseDateColumnIndex;
     private int voteAverageColumnIndex;
     private int backdropColumnIndex;
+    private int mPrevPositon;
+    private boolean mIsScrollingDown = true;
+    private GridView mFavoriteGridView;
 
     public FavoritesAdapter(Context context, Cursor cursor) {
         super(context, cursor, false);
@@ -51,6 +56,9 @@ public class FavoritesAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        if(mFavoriteGridView == null) {
+            mFavoriteGridView = (GridView) parent;
+        }
         View rootView = mInflater.inflate(R.layout.poster_item, parent, false);
         ViewHolder holder = new ViewHolder(rootView);
         rootView.setTag(holder);
@@ -60,6 +68,7 @@ public class FavoritesAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder holder = (ViewHolder) view.getTag();
+        animate(holder);
         Uri posterUrl = TmdbUtils.buildImageUrl(cursor.getString(posterPathColumnIndex));
         Picasso.with(mContext)
                 .load(posterUrl)
@@ -95,11 +104,34 @@ public class FavoritesAdapter extends CursorAdapter {
         return result;
     }
 
+    /**
+     * Poster animation
+     * (firstVisiblePosition > mPrevPositon) means gridview is scrolling DOWN
+     * (firstVisiblePosition = mPrevPositon) means take previous scroll direction
+     * (firstVisiblePosition < mPrevPositon) means gridview is scrolling UP
+     * @param holder
+     */
+    private void animate(ViewHolder holder) {
+        int firstVisiblePosition = mFavoriteGridView.getFirstVisiblePosition();
+        if (firstVisiblePosition > mPrevPositon){
+            mIsScrollingDown = true;
+        } else if (firstVisiblePosition < mPrevPositon){
+            mIsScrollingDown = false;
+        }
+        TranslateAnimation.animate(holder, mIsScrollingDown);
+        mPrevPositon = firstVisiblePosition;
+    }
+
+
     public static class ViewHolder {
         private final ImageView imageView;
 
         public ViewHolder(View rootView) {
             imageView = rootView.findViewById(R.id.poster_iv);
+        }
+
+        public ImageView getImageView() {
+            return imageView;
         }
     }
 

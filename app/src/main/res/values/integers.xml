@@ -9,4 +9,6 @@
     <!--Max number of characters in a review comment-->
     <integer name="max_review_comment_chars">140</integer>
 
+    <!--Max number of characters in a review comment-->
+    <integer name="poster_width_px">185</integer>
 </resources>

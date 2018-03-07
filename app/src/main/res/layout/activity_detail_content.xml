@@ -46,14 +46,14 @@
                             android:layout_height="match_parent"
                             android:layout_margin="16dp"
                             android:adjustViewBounds="true"
+                            android:transitionName="@string/poster_transition"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:posterUrl="@{detailModel.posterPath}"
-                            tools:src="@drawable/im_poster_sample"
-                            android:transitionName="@string/transition_name" />
+                            tools:src="@drawable/im_poster_sample" />
 
                         <TextView
                             android:id="@+id/rating_label_tv"

@@ -68,6 +68,6 @@
     <string name="content_authority">com.udacity.popularmovie</string>
 
     <!--Poster transition name-->
-    <string name="transition_name">poster_transition</string>
+    <string name="poster_transition">poster_transition</string>
 
 </resources>

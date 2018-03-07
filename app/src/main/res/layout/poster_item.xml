@@ -5,10 +5,21 @@
     style="@style/CardView.Dark"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:clickable="false"
     android:elevation="@dimen/poster_elevation"
+    android:focusable="false"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/poster_card_corner_radius"
     app:contentPadding="@dimen/poster_content_padding">
+
+    <ImageView
+        android:id="@+id/background_iv"
+        android:layout_width="@dimen/poster_width"
+        android:layout_height="@dimen/poster_height"
+        android:adjustViewBounds="true"
+        android:background="@color/colorPrimaryLight"
+        android:scaleType="fitXY"
+        android:src="@drawable/im_poster_placeholder" />
 
     <ImageView
         android:id="@+id/poster_iv"
@@ -16,9 +27,8 @@
         android:layout_height="@dimen/poster_height"
         android:adjustViewBounds="true"
         android:background="@color/colorPrimaryLight"
-        android:foreground="?android:attr/selectableItemBackground"
         android:scaleType="fitXY"
-        android:transitionName="@string/transition_name"
+        android:transitionName="@string/poster_transition"
         tools:src="@drawable/im_poster_sample" />
 
 </android.support.v7.widget.CardView>

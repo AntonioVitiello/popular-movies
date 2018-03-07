@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (fragment == null) {
             MainActivityFragment mainFragment = new MainActivityFragment();
             fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.rotate_in, R.anim.rotate_out, R.anim.rotate_in, R.anim.rotate_out)
                     .replace(R.id.main_fragment, mainFragment, MAIN_FRAGMENT_TAG)
                     .commit();
         }
