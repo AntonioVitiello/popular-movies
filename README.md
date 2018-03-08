@@ -25,15 +25,19 @@ I have correctly attributed all code obtained from other sources, such as websit
 
 I understand that Udacity will check my submission for plagiarism and that failure to adhere to the [Udacity Honor Code](https://udacity.zendesk.com/hc/en-us/articles/210667103-What-is-the-Udacity-Honor-Code) may result in the cancellation of my enrollment.
 
-![Home section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Home.png)
-![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Home_02.png)
 
-![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Home_Landscape.png)
+![Home section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Home.png)
+![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Home_02.png)
 
-![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Detail.png)
-![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Detail_02.png)
+![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Home_Landscape.png)
 
-![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Trailers.png)
-![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Reviews.png)
+![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Detail.png)
+![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Detail_02.png)
 
-![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/screenshot/Trailers_Landscape.png)
+![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Trailers.png)
+![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Reviews.png)
+
+![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Trailers_Landscape.png)
+
+![Home section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Step2_video.gif)
+
