@@ -39,5 +39,5 @@ I understand that Udacity will check my submission for plagiarism and that failu
 
 ![Detail section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Trailers_Landscape.png)
 
-![Home section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/Step2_video.gif)
+![Home section](https://github.com/AntonioVitiello/popular-movies/blob/master/art/video-step-2.gif)
 

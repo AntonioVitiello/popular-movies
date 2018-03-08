@@ -36,9 +36,9 @@
     <string name="no_trailers">Sorry no trailers for this movie.</string>
     <string name="no_reviews">Sorry no reviews for this movie.</string>
 
-    <!--FAB: add remove movie from preferred-->
-    <string name="movie_added">Added to preferred</string>
-    <string name="movie_removed">Removed from preferred</string>
+    <!--FAB: add remove movie from favorites-->
+    <string name="movie_added">Added to favorites</string>
+    <string name="movie_removed">Removed from favorites</string>
 
     <!--The trailer image preview URL-->
     <!--To retrieve a thumbnail image (120 x 90 px) of the video use eg: https://img.youtube.com/vi/3b946aGm0zs/default.jpg-->
