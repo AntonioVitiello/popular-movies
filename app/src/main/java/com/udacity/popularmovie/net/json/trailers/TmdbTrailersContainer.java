@@ -10,10 +10,10 @@ import java.util.List;
  */
 
 public class TmdbTrailersContainer {
-
     @SerializedName("id")
     @Expose
     private Integer id;
+
     @SerializedName("results")
     @Expose
     private List<TmdbTrailers> results = null;

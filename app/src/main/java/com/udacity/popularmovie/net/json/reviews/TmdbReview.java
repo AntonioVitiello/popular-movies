@@ -11,12 +11,15 @@ public class TmdbReview {
     @SerializedName("id")
     @Expose
     private String id;
+
     @SerializedName("author")
     @Expose
     private String author;
+
     @SerializedName("content")
     @Expose
     private String content;
+
     @SerializedName("url")
     @Expose
     private String url;

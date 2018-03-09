@@ -63,7 +63,7 @@ public class DetailModel extends BaseObservable {
     }
 
     private boolean isBlank(String s) {
-        return (s == null || s.length() == 0);
+        return (s == null || s.isEmpty());
     }
 
     public String getTitle() {

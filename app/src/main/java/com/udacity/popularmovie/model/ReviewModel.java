@@ -19,7 +19,7 @@ public class ReviewModel {
 
     public ReviewModel(TmdbReview result, int position, int size) {
         content = result.getContent();
-        if(content == null || content.isEmpty()){
+        if(content == null || (content.trim()).isEmpty()){
             content = sEmptyComment;
         } else if(content.length() > sMaxCommentChars) {
             content = content.substring(0, sMaxCommentChars) + "...";
